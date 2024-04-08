@@ -19,7 +19,9 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Stack from "@mui/material/Stack"
+import Drawer from "@mui/material/Drawer";
 import { exerciseContext } from '../../store/context';
+import Divider from "@mui/material/Divider"
 
 const pages = ['exercises'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -28,37 +30,53 @@ function Navbar() {
 
     const searchedExerciseRef = React.useRef()
 
-    const {setExercises , fetchData , setCurrentPage} = React.useContext(exerciseContext)
+    const [drawerOpen, setDrawerOpen] = React.useState(false);
+
+    const { setExercises, fetchData, setCurrentPage } = React.useContext(exerciseContext)
+
+
+    const [selectedCategory, setSelectedCategory] = React.useState([]);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const handleSelect = async (value) => {
+        sessionStorage.setItem("category", value);
+        fetchData(`${value}List`, setSelectedCategory);
+        setCurrentPage(1);
+        handleClose();
+    };
+
+    const handleExerciseOptionClick = async (value) => {
+
+        localStorage.setItem("subCategory", value);
+        fetchData(`${sessionStorage.getItem("category")}/${value}`, setExercises);
+        setDrawerOpen(false)
+        setCurrentPage(1);
+    };
+
 
     const handleSearch = () => {
         console.log(searchedExerciseRef.current.value);
-        fetchData(`/name/${searchedExerciseRef.current.value}` , setExercises)
+        fetchData(`/name/${searchedExerciseRef.current.value}`, setExercises)
     }
 
     const allExercises = () => {
-        fetchData('' , setExercises)
+        fetchData('', setExercises)
         setCurrentPage(1)
         handleCloseNavMenu();
-        
+
     }
 
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
 
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
 
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -103,7 +121,7 @@ function Navbar() {
     }));
 
     return (
-        <AppBar position="static" sx={{bgcolor:"black" , position:"sticky" , top:0}} >
+        <AppBar position="static" sx={{ bgcolor: "black", position: "sticky", top: 0 }} >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <FitnessCenterIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -131,14 +149,14 @@ function Navbar() {
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
+                            onClick={() => setDrawerOpen(!drawerOpen)}
                             color="inherit"
                         >
                             <MenuIcon />
                         </IconButton>
                         <Menu
                             id="menu-appbar"
-                            anchorEl={anchorElNav}
+
                             anchorOrigin={{
                                 vertical: 'bottom',
                                 horizontal: 'left',
@@ -148,8 +166,7 @@ function Navbar() {
                                 vertical: 'top',
                                 horizontal: 'left',
                             }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
+
                             sx={{
                                 display: { xs: 'block', md: 'none' },
                             }}
@@ -159,6 +176,46 @@ function Navbar() {
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
+
+
+                            <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+                                <Button
+                                    id="basic-button"
+                                    aria-controls={open ? 'basic-menu' : undefined}
+                                    aria-haspopup="true"
+                                    aria-expanded={open ? 'true' : undefined}
+                                    onClick={handleClick}
+                                    variant="contained"
+                                    color="warning"
+                                    sx={{ m: 3 }}
+                                >
+                                    {localStorage.getItem("category") ? sessionStorage.getItem("category") : <Typography color={"black"}>All Exercises</Typography>}
+                                </Button>
+                                <Menu
+                                    id="basic-menu"
+                                    anchorEl={anchorEl}
+                                    open={open}
+                                    onClose={handleClose}
+                                    MenuListProps={{ 'aria-labelledby': 'basic-button' }}
+                                >
+                                    {["equipment", "bodyPart", "target"].map((item, index) => (
+                                        <MenuItem key={index} onClick={() => handleSelect(item)}>{item}</MenuItem>
+                                    ))}
+                                </Menu>
+                                <Stack>
+                                    {selectedCategory.length === 0 ? <Typography color="white">All Exercises</Typography> : selectedCategory.map((item, index) => (
+                                        <React.Fragment key={index}>
+                                            <Button variant="text" onClick={() => handleExerciseOptionClick(item)}>
+                                                <Typography variant="button" color="black">{item}</Typography>
+                                            </Button>
+                                            <Divider sx={{ color: "gray", bgcolor: "gray" }} />
+                                        </React.Fragment>
+                                    ))}
+                                </Stack>
+
+                            </Drawer>
+
+
                         </Menu>
 
 
@@ -209,9 +266,9 @@ function Navbar() {
                                     placeholder="Search…"
                                     inputProps={{ 'aria-label': 'search' }}
                                     inputRef={searchedExerciseRef}
-                                    
+
                                 />
-                                
+
                             </Search>
                             <Button onClick={handleSearch} variant="contained" color="warning">Search</Button>
                         </Stack>
