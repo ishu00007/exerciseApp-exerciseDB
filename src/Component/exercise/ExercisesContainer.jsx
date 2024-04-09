@@ -85,7 +85,7 @@ function ExercisesContainer() {
 
                     :
 
-                    <Stack width={"100%"} height={"100%"} justifyContent={"center"} alignItems={"center"}>
+                    <Stack width={"100%"} height={"100%"} justifyContent={"center"} alignItems={"center"} mx={"auto"}>
                         <Typography variant="h4" color={"white"}>There are no such exercises!!</Typography>
                     </Stack>
 
