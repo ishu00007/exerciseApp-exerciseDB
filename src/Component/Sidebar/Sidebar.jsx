@@ -42,7 +42,7 @@ function Sidebar() {
                 color="inherit"
                 sx={{ m: 3 }}
             >
-                {localStorage.getItem("category") ? sessionStorage.getItem("category") : <Typography>All Exercises</Typography>}
+                {sessionStorage.getItem("category") ? sessionStorage.getItem("category") : <Typography variant="overline">categories</Typography>}
             </Button>
             <Menu
                 id="basic-menu"
@@ -56,7 +56,7 @@ function Sidebar() {
                 ))}
             </Menu>
             <Stack>
-                {selectedCategory.length === 0 ? <Typography color="white">All Exercises</Typography> : selectedCategory.map((item, index) => (
+                {selectedCategory.length === 0 ? <Typography textAlign={"center"} color="white">no category selected</Typography> : selectedCategory.map((item, index) => (
                     <React.Fragment key={index}>
                         <Button variant="text" onClick={() => handleExerciseOptionClick(item)}>
                             <Typography variant="button" color="white">{item}</Typography>
