@@ -189,7 +189,7 @@ function Navbar() {
                                     color="warning"
                                     sx={{ m: 3 }}
                                 >
-                                    {localStorage.getItem("category") ? sessionStorage.getItem("category") : <Typography color={"black"}>All Exercises</Typography>}
+                                    {localStorage.getItem("category") ? sessionStorage.getItem("category") : <Typography color={"white"}>All Exercises</Typography>}
                                 </Button>
                                 <Menu
                                     id="basic-menu"
