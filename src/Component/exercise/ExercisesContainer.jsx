@@ -15,7 +15,7 @@ function ExercisesContainer() {
         if (location === "/:category/:subCategory") {
             fetchData(`/${category}/${subCategory}`, setExercises)
         }
-        else if (location === "/") {
+        else{
             fetchData('', setExercises);
         }
 
