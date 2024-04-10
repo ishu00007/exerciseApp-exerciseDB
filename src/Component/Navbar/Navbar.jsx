@@ -64,8 +64,8 @@ function Navbar() {
 
 
     const handleSearch = () => {
-        console.log(searchedExerciseRef.current.value);
-        fetchData(`/name/${searchedExerciseRef.current.value}`, setExercises)
+        //console.log(searchedExerciseRef.current.value);
+        fetchData(`/name/${searchedExerciseRef.current.value.toLowerCase()}`, setExercises)
     }
 
     const allExercises = () => {
