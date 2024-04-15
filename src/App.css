@@ -2,11 +2,15 @@
   padding : 0 ;
   margin:  0;
   box-sizing: border-box;
+<<<<<<< HEAD
   
+=======
+>>>>>>> 770b82edc09bec7d1f00b4532b6128e0971510b0
 }
 
 body{
   background-color: black;
+<<<<<<< HEAD
   /* width */
 ::-webkit-scrollbar {
   width: 2px;
@@ -27,3 +31,27 @@ body{
   background: #319cb100; 
 }
 }
+=======
+
+
+  ::-webkit-scrollbar {
+  width: 2px;
+  }
+
+
+
+  ::-webkit-scrollbar-track {
+  background: #080809; 
+  }
+
+
+  ::-webkit-scrollbar-thumb {
+  background: #63b0ee; 
+  }
+
+
+  ::-webkit-scrollbar-thumb:hover {
+  background: #319bb1; 
+  }
+}
+>>>>>>> 770b82edc09bec7d1f00b4532b6128e0971510b0

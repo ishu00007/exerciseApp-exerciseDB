@@ -64,8 +64,8 @@ function Navbar() {
 
 
     const handleSearch = () => {
-        console.log(searchedExerciseRef.current.value);
-        fetchData(`/name/${searchedExerciseRef.current.value}`, setExercises)
+        //console.log(searchedExerciseRef.current.value);
+        fetchData(`/name/${searchedExerciseRef.current.value.toLowerCase()}`, setExercises)
     }
 
     const allExercises = () => {
@@ -189,7 +189,7 @@ function Navbar() {
                                     color="warning"
                                     sx={{ m: 3 }}
                                 >
-                                    {localStorage.getItem("category") ? sessionStorage.getItem("category") : <Typography color={"black"}>All Exercises</Typography>}
+                                    {localStorage.getItem("category") ? sessionStorage.getItem("category") : <Typography color={"white"}>All Exercises</Typography>}
                                 </Button>
                                 <Menu
                                     id="basic-menu"

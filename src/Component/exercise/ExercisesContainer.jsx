@@ -12,8 +12,15 @@ function ExercisesContainer() {
     const [itemsPerPage] = useState(6); // Number of items per page
 
     useEffect(() => {
+<<<<<<< HEAD
 
         if(exercises.length < 1000){
+=======
+        if (location === "/:category/:subCategory") {
+            fetchData(`/${category}/${subCategory}`, setExercises)
+        }
+        else{
+>>>>>>> 770b82edc09bec7d1f00b4532b6128e0971510b0
             fetchData('', setExercises);
         }
     }, []);
@@ -84,7 +91,7 @@ function ExercisesContainer() {
 
                     :
 
-                    <Stack width={"100%"} height={"100%"} justifyContent={"center"} alignItems={"center"}>
+                    <Stack width={"100%"} height={"100%"} justifyContent={"center"} alignItems={"center"} mx={"auto"}>
                         <Typography variant="h4" color={"white"}>There are no such exercises!!</Typography>
                     </Stack>
 
