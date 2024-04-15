@@ -1,20 +1,21 @@
 import React from "react";
 import {Stack , Typography , List , ListItem , Box , Chip , Divider} from "@mui/material"
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import "./exercise.css"
 function ExerciseInfo(){
 
     const selectedExercise = JSON.parse(sessionStorage.getItem("selectedExercise"))
     return(
-        <Stack direction={{xs:"column" , sm:"row" , md:"row" , lg :"row" , xl:"row"}} height={"100%"} maxWidth={"100vw"} mt={5} mx={{xs:2}}>
-            <Stack justifyContent={"center"} alignItems={"center"} height={"100%"}>
-                <img src={selectedExercise.gif} width={400}/> 
+        <Stack direction={{xs:"column" , sm:"row" , md:"row" , lg :"row" , xl:"row"}} height={"100%"} maxWidth={"100vw"} mt={5} gap={4} mx={{xs:2}}>
+            <Stack justifyContent={"center"} alignItems={"center"} my={"auto"} height={"100%"} className="exerciseImgContainer" borderRadius={"50px"}>
+                <img src={selectedExercise.gif} width={400} className="exerciseImg"/> 
             </Stack>
-            <Stack gap={4} height={"100%"} direction={"column"} >
+            <Stack gap={4} height={"100%"} direction={"column"}>
                 {/* <Typography variant="h3" fontFamily={"cursive"}>{selectedExercise.name}</Typography> */}
                 <Box>
                     <Typography variant="h5" color={"gray"}>Instructions</Typography>
                 <List>
-                    {selectedExercise.instructions.map(item => <ListItem ><ArrowRightAltIcon/><Typography color={"black"} variant="h6"> {item}</Typography></ListItem>)}
+                    {selectedExercise.instructions.map(item => <ListItem ><ArrowRightAltIcon/><Typography color={"white"} variant="h6"> {item}</Typography></ListItem>)}
                 </List>
                 </Box>
                 

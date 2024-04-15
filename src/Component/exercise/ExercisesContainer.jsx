@@ -12,13 +12,10 @@ function ExercisesContainer() {
     const [itemsPerPage] = useState(6); // Number of items per page
 
     useEffect(() => {
-        if (location === "/:category/:subCategory") {
-            fetchData(`/${category}/${subCategory}`, setExercises)
-        }
-        else if (location === "/") {
+
+        if(exercises.length < 1000){
             fetchData('', setExercises);
         }
-
     }, []);
 
     // Logic to calculate the indexes of items to be displayed on the current page
@@ -35,7 +32,7 @@ function ExercisesContainer() {
 
 
     return (
-        <Grid container spacing={2} bgcolor={"black"} px={3} overflow={"scroll"} height={`calc(100vh - 68.5px)`} sx={{ overflowX: "hidden" }} pt={{xs:3}}>
+        <Grid container spacing={2} bgcolor={"black"} px={3}  height={`calc(100vh - 68.5px)`} pt={{xs:3}} maxWidth={"90vw"}>
             {loading ?
                 <Stack width={"100%"} height={"100%"} justifyContent={"center"} alignItems={"center"}>
                     <CircularProgress color="warning" />
@@ -59,25 +56,27 @@ function ExercisesContainer() {
                             </Grid>
                         ))}
 
-                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} sx={{ display: 'flex', justifyContent: 'center', marginTop: 4 }}>
+                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} sx={{ display: 'flex', justifyContent: 'center', marginTop: 0 }}>
                             <Pagination
 
                                 count={Math.ceil(exercises.length / itemsPerPage)}
                                 page={currentPage}
                                 onChange={handlePageChange}
-                                variant="outlined"
+                                variant="text"
                                 shape="rounded"
-                                color="primary"
+                                color="standard"
 
 
                                 sx={{
-                                    backgroundColor: 'white',
-                                    color: 'white',
-                                    p: 2,
+                                    bgcolor:" rgba(243, 243, 243, 1)",
+                                    
+                                    py:1,
+                                    px:2,
                                     borderRadius: 10,
                                     mb: 4,
-                                    maxHeight: "50px",
-                                    
+                                    maxHeight: "70px",
+                                    textAlign : "center"
+
                                 }}
                             />
                         </Grid>

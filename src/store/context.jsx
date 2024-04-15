@@ -12,7 +12,7 @@ const ExerciseContextProvider = ({ children }) => {
     const options = {
 
         headers: {
-            'X-RapidAPI-Key': '8c1c58d811msh2a1e520a91f903fp1c2f23jsnd39b702c965e',
+            'X-RapidAPI-Key': '1eb02ef333mshfe079367319479fp1a6fe8jsnf44fdc248bf3',
             'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
         } ,
         params :{

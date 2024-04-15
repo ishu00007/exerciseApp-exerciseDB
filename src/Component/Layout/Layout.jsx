@@ -7,14 +7,14 @@ import Sidebar from "../Sidebar/Sidebar";
 
 function Layout(){
     return(
-        <>
+        <Stack >
             <Navbar/>
-            <Stack direction={"row"} overflow={"hidden"} >
+            <Stack direction={"row"}>
                 <Sidebar/>
                 <Outlet/>
             </Stack>
             
-        </>
+        </Stack>
     )
 }
 

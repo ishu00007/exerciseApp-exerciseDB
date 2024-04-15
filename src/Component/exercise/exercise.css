@@ -1,0 +1,15 @@
+.exerciseImgContainer{
+    position: relative;
+    overflow: hidden;
+    transition: all ease-in 1s;
+}
+
+.exerciseImgContainer:hover{
+    .exerciseImg{
+        transform: scale(1.06);
+    }
+}
+.exerciseImg{
+    transition: all ease 1s;
+    
+}

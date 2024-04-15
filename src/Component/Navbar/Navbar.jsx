@@ -263,7 +263,7 @@ function Navbar() {
                                     <SearchIcon />
                                 </SearchIconWrapper>
                                 <StyledInputBase
-                                    placeholder="Search…"
+                                    placeholder="exercise name..."
                                     inputProps={{ 'aria-label': 'search' }}
                                     inputRef={searchedExerciseRef}
 
